@@ -4,12 +4,10 @@ import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
 
 import { CATEGORIES, TASKS } from "../data";
-console.log("Here's the data you're working with");
-console.log(TASKS);
 
 function App() {
   const [tasks, setTasks] = useState(TASKS)
-  const [category, setCategory] = useState(CATEGORIES)
+  const [category, setCategory] = useState("All")
 
   function handleDelete(deletedTaskText){
     setTasks(tasks.filter(task => task.text !== deletedTaskText))
@@ -18,7 +16,7 @@ function App() {
   function handleAddTask(newTask){
     setTasks([...tasks, newTask])
   }
-  const visibleTasks = tasks.filter(task => category === "All" || task.category === category)
+  const visibleTasks = tasks.filter((task) => category === "All" || task.category === category)
   return (
     <div className="App">
       <h2>My tasks</h2>
@@ -27,10 +25,10 @@ function App() {
         selectedCategory={category}
         onSelectCategory={setCategory}/>
       <NewTaskForm
-      categoryList={CATEGORIES.filter(cat => cat !== "All")}
-      onTaskSubmit={handleAddTask}/>
+      categories={CATEGORIES.filter(cat => cat !== "All")}
+      onTaskFormSubmit={handleAddTask}/>
       <TaskList 
-        taskData={visibleTasks}
+        tasks={visibleTasks}
         onTaskDelete={handleDelete}
         />
     </div>
