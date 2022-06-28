@@ -20,7 +20,9 @@ function App() {
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter 
-        category={CATEGORIES}/>
+        categories={CATEGORIES}
+        selectedCategory={category}
+        onSelectCategory={setCategory}/>
       <NewTaskForm />
       <TaskList 
         taskData={visibleTasks}
