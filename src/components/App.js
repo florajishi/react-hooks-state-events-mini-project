@@ -11,9 +11,11 @@ function App() {
   const [tasks, setTasks] = useState(TASKS)
   const [category, setCategory] = useState(CATEGORIES)
 
-  function handleDelete(event){
-
+  function handleDelete(deletedTaskText){
+    setTasks(tasks.filter(task => task.text !== deletedTaskText))
   }
+
+  const visibleTasks = tasks.filter(task => category === "All" || task.category === category)
   return (
     <div className="App">
       <h2>My tasks</h2>
@@ -21,7 +23,7 @@ function App() {
         category={CATEGORIES}/>
       <NewTaskForm />
       <TaskList 
-        taskData={TASKS}
+        taskData={visibleTasks}
         onTaskDelete={handleDelete}
         />
     </div>
